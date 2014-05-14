@@ -1,0 +1,39 @@
+ <page title="" without-aside >
+
+    <body: class="show-page project"/>
+
+    <content-header:>
+      <h2 class="heading">
+        <p key="project.show.heading" name="#{name(:no_wrapper => true)}">
+          <name/>
+        </p>
+      </h2>
+
+      <record-flags fields=""/>
+
+      <a action="edit" if="&can_edit?" class="edit-link">
+        <p key="project.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Project
+        </p>
+      </a>
+    </content-header:>
+
+    <content-body:>
+      <section class="collection-section">
+        <h3 class="collection-heading">
+          <p key="test_group.collection.heading" count="&this.test_groups.count" >
+            <human-collection-name collection="test_groups" your/>
+          </p>
+        </h3>
+
+        <collection:test_groups/>
+
+        <a:test_groups action="new" if="&can_create?(@project.test_groups)" class="new-link">
+          <p key="test_group.actions.new" count="1">
+            New Test Group
+          </p>
+        </a:test_groups>
+      </section>
+    </content-body:>
+
+  </page>

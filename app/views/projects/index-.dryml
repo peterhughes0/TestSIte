@@ -1,0 +1,28 @@
+
+  <page title="Projects">
+    <body: class="index-page project" />
+
+    <content-header:>
+      <h2 class="heading">
+          <model-name-human model="&model"/>
+      </h2>
+
+      <p class="count" >
+        
+      </p>
+    </content-header:>
+
+    <content-body:>
+      <a action="new" to="&model" class="new-link">
+        New Project
+      </a>
+
+      <page-nav class="top-page-nav"/>
+
+      <collection/>
+
+      <page-nav class="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>

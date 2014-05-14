@@ -1,0 +1,733 @@
+<!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
+
+
+<!-- ====== Main Navigation ====== -->
+
+<def tag="main-nav">
+  <navigation class="main-nav" merge-attrs param="default">
+    <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Project"><ht key="project.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&TestRun"><ht key="test_run.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+  </navigation>
+</def>
+
+
+
+
+<!-- ====== Project Pages ====== -->
+
+<def tag="index-page" for="Project">
+  <page merge title="#{ht 'project.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page project" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="project.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="project.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+      <a action="new" to="&model" param="new-link">
+        <ht key="project.actions.new">New Project</ht>
+      </a>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Project">
+  <page merge title="#{ht 'project.new.title', :default=>[' New Project'] }">
+    <body: class="new-page project" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="project.new.heading">
+          New Project
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'project.actions.create', :default=>['Create Project']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Project">
+  <page merge title="#{ht 'project.show.title', :default=>['Project'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page project" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="project.show.heading" name="#{name(:no_wrapper => true)}">
+          Project <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="project.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Project
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <section param="collection-section">
+        <h3 param="collection-heading">
+          <ht key="test_group.collection.heading" count="&this.test_groups.count" >
+            <human-collection-name collection="test_groups" your/>
+          </ht>
+        </h3>
+
+        <collection:test_groups param/>
+
+        <a:test_groups action="new" if="&can_create?(@project.test_groups)" param="new-link">
+          <ht key="test_group.actions.new" count="1">
+            New Test Group
+          </ht>
+        </a:test_groups>
+      </section>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Project">
+  <page merge title="#{ht 'project.edit.title', :default=>['Edit Project'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page project" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="project.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit Project
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'project.actions.delete', :default=>['Remove This Project']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== TestGroup Pages ====== -->
+
+<def tag="index-page" for="TestGroup">
+  <page merge title="#{ht 'test_group.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page test-group" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_group.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="test_group.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+      <a action="new" to="&model" param="new-link">
+        <ht key="test_group.actions.new">New Test group</ht>
+      </a>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="TestGroup">
+  <page merge title="#{ht 'test_group.new.title', :default=>[' New Test group'] }">
+    <body: class="new-page test-group" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_group.new.heading">
+          New Test group
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'test_group.actions.create', :default=>['Create Test group']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="TestGroup">
+  <page merge title="#{ht 'test_group.show.title', :default=>['Test group'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page test-group" param/>
+
+    <content-header: param>
+      <a:project param="parent-link">&laquo; <ht key="test_group.actions.back_to_parent" parent="Project" name="&this">Back to <name/></ht></a:project>
+      <h2 param="heading">
+        <ht key="test_group.show.heading" name="#{name(:no_wrapper => true)}">
+          Test group <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="test_group.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Test group
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <section param="collection-section">
+        <h3 param="collection-heading">
+          <ht key="test.collection.heading" count="&this.tests.count" >
+            <human-collection-name collection="tests" your/>
+          </ht>
+        </h3>
+
+        <collection:tests param/>
+
+        <a:tests action="new" if="&can_create?(@test_group.tests)" param="new-link">
+          <ht key="test.actions.new" count="1">
+            New Test
+          </ht>
+        </a:tests>
+      </section>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="TestGroup">
+  <page merge title="#{ht 'test_group.edit.title', :default=>['Edit Test group'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page test-group" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_group.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit Test group
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'test_group.actions.delete', :default=>['Remove This Test group']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+
+<def tag="new-for-project-page" polymorphic/>
+<def tag="new-for-project-page" for="TestGroup">
+  <page merge title="#{ht 'test_group.new_for_owner.title', :default=>['New Test group for']} #{name :with => @project}">
+    <body: class="new-for-owner-page  test-group" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_group.new_for_owner.heading">
+          New Test Group
+        </ht>
+      </h2>
+      <h3 param="subheading">
+        <ht key="test_group.new_for_owner.subheading">
+          For:
+        </ht>
+        <a with="&@project"/>
+      </h3>
+    </content-header:>
+
+    <content-body: param>
+      <form owner="project" method="post" param>
+        <field-list: skip="project"/>
+        <submit: label="#{ht 'test_group.actions.create', :default=>['Create Test group']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== TestRun Pages ====== -->
+
+<def tag="index-page" for="TestRun">
+  <page merge title="#{ht 'test_run.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page test-run" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_run.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="test_run.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+      <a action="new" to="&model" param="new-link">
+        <ht key="test_run.actions.new">New Test run</ht>
+      </a>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="TestRun">
+  <page merge title="#{ht 'test_run.new.title', :default=>[' New Test run'] }">
+    <body: class="new-page test-run" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_run.new.heading">
+          New Test run
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'test_run.actions.create', :default=>['Create Test run']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="TestRun">
+  <page merge title="#{ht 'test_run.show.title', :default=>['Test run'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page test-run" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_run.show.heading" name="#{name(:no_wrapper => true)}">
+          Test run <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="test_run.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Test run
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <field-list fields="release_number" param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="TestRun">
+  <page merge title="#{ht 'test_run.edit.title', :default=>['Edit Test run'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page test-run" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_run.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit Test run
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'test_run.actions.delete', :default=>['Remove This Test run']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== Test Pages ====== -->
+
+<def tag="index-page" for="Test">
+  <page merge title="#{ht 'test.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page test" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="test.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+      <a action="new" to="&model" param="new-link">
+        <ht key="test.actions.new">New Test</ht>
+      </a>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Test">
+  <page merge title="#{ht 'test.new.title', :default=>[' New Test'] }">
+    <body: class="new-page test" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test.new.heading">
+          New Test
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'test.actions.create', :default=>['Create Test']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Test">
+  <page merge title="#{ht 'test.show.title', :default=>['Test'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page test" param/>
+
+    <content-header: param>
+      <a:test_group param="parent-link">&laquo; <ht key="test.actions.back_to_parent" parent="Test group" name="&this">Back to <name/></ht></a:test_group>
+      <h2 param="heading">
+        <ht key="test.show.heading" name="#{name(:no_wrapper => true)}">
+          Test <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="status" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="test.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Test
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <view:description param="description" />
+      <field-list fields="prerequisites, steps, input, expected_result, actual_result, comments, project, test_run" param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Test">
+  <page merge title="#{ht 'test.edit.title', :default=>['Edit Test'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page test" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit Test
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'test.actions.delete', :default=>['Remove This Test']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+
+<def tag="new-for-test-group-page" polymorphic/>
+<def tag="new-for-test-group-page" for="Test">
+  <page merge title="#{ht 'test.new_for_owner.title', :default=>['New Test for']} #{name :with => @test_group}">
+    <body: class="new-for-owner-page  test" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test.new_for_owner.heading">
+          New Test
+        </ht>
+      </h2>
+      <h3 param="subheading">
+        <ht key="test.new_for_owner.subheading">
+          For:
+        </ht>
+        <a with="&@test_group"/>
+      </h3>
+    </content-header:>
+
+    <content-body: param>
+      <form owner="test_group" method="post" param>
+        <field-list: skip="test_group"/>
+        <submit: label="#{ht 'test.actions.create', :default=>['Create Test']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== User Pages ====== -->
+
+<def tag="index-page" for="User">
+  <page merge title="#{ht 'user.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page user" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="user.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="user.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+      <div param="new-form">
+        <h3 param="new-form-heading">
+          <ht key="user.form.new.heading">New User</ht>
+        </h3>
+        <form with="&@invalid_record || new_for_current_user(User)" param/>
+      </div>
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="User">
+  <page merge title="#{ht 'user.new.title', :default=>[' New User'] }">
+    <body: class="new-page user" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="user.new.heading">
+          New User
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'user.actions.create', :default=>['Create User']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="User">
+  <page merge title="#{ht 'user.show.title', :default=>['User'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page user" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="user.show.heading" name="#{name(:no_wrapper => true)}">
+          User <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="administrator" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="user.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit User
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <field-list fields="email_address, state" param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="User">
+  <page merge title="#{ht 'user.edit.title', :default=>['Edit User'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page user" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="user.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit User
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'user.actions.delete', :default=>['Remove This User']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="signup-page" polymorphic/>
+<def tag="signup-page" for="User">
+
+  <page title="#{ht 'user.signup.title', :default=>['Signup']}" merge>
+
+    <body: class="lifecycle-start-page signup-page" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="user.signup.heading">
+          Signup
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <signup-form param="form"/>
+    </content-body:>
+
+  </page>
+</def>
+
+<def tag="activate-page" polymorphic/>
+<def tag="activate-page" for="User">
+  <page title="#{ht 'user.activate.title', :default=>['Activate']}" merge>
+
+    <body: class="lifecycle-transition-page activate-page" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="user.activate.heading">
+          Activate
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <activate-form param="form"/>
+    </content-body:>
+
+  </page>
+</def>
+
+<def tag="reset-password-page" polymorphic/>
+<def tag="reset-password-page" for="User">
+  <page title="#{ht 'user.reset_password.title', :default=>['Reset Password']}" merge>
+
+    <body: class="lifecycle-transition-page reset-password-page" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="user.reset_password.heading">
+          Reset Password
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <reset-password-form param="form"/>
+    </content-body:>
+
+  </page>
+</def>
+
+

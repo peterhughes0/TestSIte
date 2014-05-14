@@ -1,0 +1,53 @@
+<!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
+
+
+<def tag="card" for="Project">
+  <card class="project" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <ht key="test_group.collection.count" count="&this.test_groups.size">
+         <count:test_groups param/>
+      </ht>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="Test">
+  <card class="test" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="TestGroup">
+  <card class="test-group" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+    <body: param>
+      <ht key="test.collection.count" count="&this.tests.size">
+         <count:tests param/>
+      </ht>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="TestRun">
+  <card class="test-run" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+
+<def tag="card" for="User">
+  <card class="user" param="default" merge>
+    <header: param>
+      <h4 param="heading"><a><name/></a></h4>
+    </header:>
+  </card>
+</def>
+

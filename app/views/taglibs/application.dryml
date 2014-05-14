@@ -1,0 +1,59 @@
+<!-- this file is included by front_site.dryml, admin_site.dryml et al, so
+you can place common code in this file. -->
+
+<extend tag="page">
+  <old-page merge without-live-search>
+ 
+ 
+  </old-page>
+</extend>
+
+
+<def tag="show-page" for="Project">
+  <page merge title="#{ht 'project.show.title', :default=>['Project'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page project" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        
+          <name/>
+        
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="project.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit <name/>
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+	
+	<table-plus:tests fields="this, description, test_group" without-search-form>
+		</table-plus>
+		
+		
+      <section param="collection-section">
+        <h3 param="collection-heading">
+          <ht key="test_group.collection.heading" count="&this.test_groups.count" >
+            <human-collection-name collection="test_groups" your/>
+          </ht>
+        </h3>
+		
+		
+
+        <collection:test_groups param/>
+
+        <a:test_groups action="new" if="&can_create?(@project.test_groups)" param="new-link">
+          <ht key="test_group.actions.new" count="1">
+            New Test Group
+          </ht>
+        </a:test_groups>
+      </section>
+    </content-body:>
+
+  </page>
+</def>
