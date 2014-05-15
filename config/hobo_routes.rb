@@ -9,6 +9,17 @@ TestSite::Application.routes.draw do
   resources :projects
 
 
+  # Resource routes for controller results
+  resources :results do
+    member do
+      put 'pass', :action => 'do_pass'
+      get 'pass'
+      put 'fail', :action => 'do_fail'
+      get 'fail'
+    end
+  end
+
+
   # Resource routes for controller tests
   resources :tests, :only => [:new, :edit, :show, :create, :update, :destroy]
 
@@ -39,6 +50,16 @@ TestSite::Application.routes.draw do
 
   # Resource routes for controller test_runs
   resources :test_runs
+
+  # Owner routes for controller test_runs
+  resources :projects, :as => :project, :only => [] do
+    resources :test_runs, :only => [] do
+      get '/', :on => :new, :action => 'new_for_project'
+      collection do
+        post '/', :action => 'create_for_project'
+      end
+    end
+  end
 
 
   # Resource routes for controller users

@@ -14,11 +14,12 @@ class Test < ActiveRecord::Base
 	comments	:text
     timestamps
   end
-  attr_accessible :name, :description, :prerequisites, :steps, :input, :expected_result, :actual_result, :status, :comments, :project
+  attr_accessible :name, :description, :prerequisites, :steps, :input, :expected_result, :actual_result, :status, :comments, :project, :results
   
   belongs_to :project
   belongs_to :test_group
-  belongs_to :test_run
+  has_many :test_runs, :through => :results
+  has_many :results
 
   # --- Permissions --- #
 

@@ -1,0 +1,27 @@
+<page>
+
+    <body: class="show-page test"/>
+
+    <content-header:>
+      <a:test_group class="parent-link">&laquo; <p key="test.actions.back_to_parent" parent="Test group" name="&this">Back to <name/></p></a:test_group>
+      <h2 class="heading">
+        <p key="test.show.heading" name="#{name(:no_wrapper => true)}">
+          <name/>
+        </p>
+      </h2>
+
+      <record-flags fields="status"/>
+
+      <a action="edit" if="&can_edit?" class="edit-link">
+        <p key="test.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Test
+        </p>
+      </a>
+    </content-header:>
+
+    <content-body:>
+      <view:description class="description" />
+      <field-list fields="prerequisites, steps, input, expected_result, actual_result, comments, project, test_run"/>
+    </content-body:>
+
+  </page> 

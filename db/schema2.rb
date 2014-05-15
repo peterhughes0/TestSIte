@@ -11,27 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140515142702) do
+ActiveRecord::Schema.define(version: 20140512170617) do
 
   create_table "projects", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "results", force: true do |t|
-    t.string   "outcome"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "test_id"
-    t.integer  "test_run_id"
-    t.string   "state",         default: "untested"
-    t.datetime "key_timestamp"
-  end
-
-  add_index "results", ["state"], name: "index_results_on_state"
-  add_index "results", ["test_id"], name: "index_results_on_test_id"
-  add_index "results", ["test_run_id"], name: "index_results_on_test_run_id"
 
   create_table "test_groups", force: true do |t|
     t.string   "name"
@@ -46,10 +32,7 @@ ActiveRecord::Schema.define(version: 20140515142702) do
     t.string   "release_number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "project_id"
   end
-
-  add_index "test_runs", ["project_id"], name: "index_test_runs_on_project_id"
 
   create_table "tests", force: true do |t|
     t.string   "name"
@@ -65,10 +48,12 @@ ActiveRecord::Schema.define(version: 20140515142702) do
     t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "test_group_id"
+    t.integer  "test_run_id"
   end
 
   add_index "tests", ["project_id"], name: "index_tests_on_project_id"
   add_index "tests", ["test_group_id"], name: "index_tests_on_test_group_id"
+  add_index "tests", ["test_run_id"], name: "index_tests_on_test_run_id"
 
   create_table "users", force: true do |t|
     t.string   "crypted_password",          limit: 40

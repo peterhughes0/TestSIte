@@ -7,6 +7,7 @@
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
     <nav-item with="&Project"><ht key="project.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&Result"><ht key="result.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item with="&TestRun"><ht key="test_run.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
@@ -137,6 +138,160 @@
 </def>
 
 
+
+
+
+<!-- ====== Result Pages ====== -->
+
+<def tag="index-page" for="Result">
+  <page merge title="#{ht 'result.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page result" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="result.index.heading">
+          <model-name-human model="&model"/>
+        </ht>
+      </h2>
+
+      <p param="count" if>
+        <ht key="result.collection.count" count="&collection_count">
+          <count summary/>
+        </ht>
+      </p>
+    </content-header:>
+
+    <content-body: param>
+      <a action="new" to="&model" param="new-link">
+        <ht key="result.actions.new">New Result</ht>
+      </a>
+
+      <page-nav param="top-page-nav"/>
+
+      <collection param/>
+
+      <page-nav param="bottom-page-nav"/>
+
+
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Result">
+  <page merge title="#{ht 'result.new.title', :default=>[' New Result'] }">
+    <body: class="new-page result" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="result.new.heading">
+          New Result
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <form param>
+        <submit: label="#{ht 'result.actions.create', :default=>['Create Result']}"/>
+      </form>
+    </content-body:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Result">
+  <page merge title="#{ht 'result.show.title', :default=>['Result'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page result" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="result.show.heading" name="#{name(:no_wrapper => true)}">
+          Result <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="result.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Result
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <field-list fields="state, test, test_run" param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Result">
+  <page merge title="#{ht 'result.edit.title', :default=>['Edit Result'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page result" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="result.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit Result
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'result.actions.delete', :default=>['Remove This Result']}" param/>
+    </content-header:>
+
+    <content-body: param>
+      <form param/>
+    </content-body:>
+
+  </page>
+</def>
+
+
+
+<def tag="pass-page" polymorphic/>
+<def tag="pass-page" for="Result">
+  <page title="#{ht 'result.pass.title', :default=>['Pass']}" merge>
+
+    <body: class="lifecycle-transition-page pass-page" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="result.pass.heading">
+          Pass
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <pass-form param="form"/>
+    </content-body:>
+
+  </page>
+</def>
+
+<def tag="fail-page" polymorphic/>
+<def tag="fail-page" for="Result">
+  <page title="#{ht 'result.fail.title', :default=>['Fail']}" merge>
+
+    <body: class="lifecycle-transition-page fail-page" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="result.fail.heading">
+          Fail
+        </ht>
+      </h2>
+    </content-header:>
+
+    <content-body: param>
+      <fail-form param="form"/>
+    </content-body:>
+
+  </page>
+</def>
 
 
 
@@ -377,7 +532,7 @@
     </content-header:>
 
     <content-body: param>
-      <field-list fields="release_number" param/>
+      <field-list fields="project" param/>
     </content-body:>
 
   </page>
@@ -402,6 +557,36 @@
       <form param/>
     </content-body:>
 
+  </page>
+</def>
+
+
+
+<def tag="new-for-project-page" polymorphic/>
+<def tag="new-for-project-page" for="TestRun">
+  <page merge title="#{ht 'test_run.new_for_owner.title', :default=>['New Test run for']} #{name :with => @project}">
+    <body: class="new-for-owner-page  test-run" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_run.new_for_owner.heading">
+          New Test Run
+        </ht>
+      </h2>
+      <h3 param="subheading">
+        <ht key="test_run.new_for_owner.subheading">
+          For:
+        </ht>
+        <a with="&@project"/>
+      </h3>
+    </content-header:>
+
+    <content-body: param>
+      <form owner="project" method="post" param>
+        <field-list: skip="project"/>
+        <submit: label="#{ht 'test_run.actions.create', :default=>['Create Test run']}"/>
+      </form>
+    </content-body:>
   </page>
 </def>
 
@@ -491,7 +676,7 @@
 
     <content-body: param>
       <view:description param="description" />
-      <field-list fields="prerequisites, steps, input, expected_result, actual_result, comments, project, test_run" param/>
+      <field-list fields="prerequisites, steps, input, expected_result, actual_result, comments, project" param/>
     </content-body:>
 
   </page>

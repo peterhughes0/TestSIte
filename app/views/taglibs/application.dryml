@@ -28,6 +28,12 @@ you can place common code in this file. -->
           Edit <name/>
         </ht>
       </a>
+	  
+	  <a:test_runs action="new" if="&can_create?(@project.test_runs)" param="new-link">
+          <ht key="test_run.actions.new" count="1">
+            New Test Run
+          </ht>
+        </a:test_runs>
     </content-header:>
 
     <content-body: param>
@@ -53,6 +59,42 @@ you can place common code in this file. -->
           </ht>
         </a:test_groups>
       </section>
+    </content-body:>
+
+  </page>
+</def>
+
+
+<def tag="show-page" for="TestRun">
+  <page merge title="#{ht 'test_run.show.title', :default=>['Test run'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page test-run" param/>
+
+    <content-header: param>
+      <h2 param="heading">
+        <ht key="test_run.show.heading" name="#{name(:no_wrapper => true)}">
+          Test run <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="" param/>
+
+      <a action="edit" if="&can_edit?" param="edit-link">
+        <ht key="test_run.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Test run
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: param>
+      <field-list fields="release_number, project" param/>
+	  
+	  <table-plus:results fields="test, test.description, test.test_group, this" without-search-form>
+	  <controls:>
+<transition-buttons/>
+</controls:>
+		</table-plus>
+		
     </content-body:>
 
   </page>

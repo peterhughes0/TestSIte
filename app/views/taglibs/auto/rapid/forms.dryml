@@ -13,6 +13,40 @@
 
 
 
+<def tag="form" for="Result">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="outcome, state, test, test_run" param/>
+    <div param="actions">
+      <submit label="#{ht 'result.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+<def tag="pass-form" polymorphic/>
+<def tag="pass-form" for="Result">
+  <form lifecycle="pass" merge param="default">
+    <error-messages param/>
+    <input type="hidden" name="key" value="&this.lifecycle.provided_key" if="&this.lifecycle.provided_key"/>
+    <field-list fields="" param/>
+    <div param="actions">
+      <submit label="#{t 'activerecord.attributes.result.lifecycle.transitions.pass', :default=>['Pass']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+<def tag="fail-form" polymorphic/>
+<def tag="fail-form" for="Result">
+  <form lifecycle="fail" merge param="default">
+    <error-messages param/>
+    <input type="hidden" name="key" value="&this.lifecycle.provided_key" if="&this.lifecycle.provided_key"/>
+    <field-list fields="" param/>
+    <div param="actions">
+      <submit label="#{t 'activerecord.attributes.result.lifecycle.transitions.fail', :default=>['Fail']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
 <def tag="form" for="TestGroup">
   <form merge param="default">
     <error-messages param/>
@@ -28,7 +62,7 @@
 <def tag="form" for="TestRun">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="release_number" param/>
+    <field-list fields="release_number, project" param/>
     <div param="actions">
       <submit label="#{ht 'test_run.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
@@ -40,7 +74,7 @@
 <def tag="form" for="Test">
   <form merge param="default">
     <error-messages param/>
-    <field-list fields="name, description, prerequisites, steps, input, expected_result, actual_result, status, comments, project, test_group, test_run" param/>
+    <field-list fields="name, description, prerequisites, steps, input, expected_result, actual_result, status, comments, project, test_group" param/>
     <div param="actions">
       <submit label="#{ht 'test.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
     </div>
